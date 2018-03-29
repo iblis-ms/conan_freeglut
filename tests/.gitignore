@@ -1,0 +1,4 @@
+output*
+.DS_Store
+app/conan_imports_manifest.txt
+app/conanfile.txt
