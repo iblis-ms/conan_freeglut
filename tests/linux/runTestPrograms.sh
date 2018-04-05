@@ -19,9 +19,9 @@ do
   do
     for gles in False # True https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1706936 - cannot install libgles1-mesa
     do
-      for printErrors in True #False
+      for printErrors in True False
       do
-        for printWarnings in True # False
+        for printWarnings in True False
         do
           for compiler in clang gcc
           do

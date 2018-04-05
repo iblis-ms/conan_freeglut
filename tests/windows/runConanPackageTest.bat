@@ -11,6 +11,8 @@ CD %REPO_BASE_DIR%
 SET "CC=%GCC%"
 SET "CXX=%GPP%"
 
+conan export . FreeGlut/3.0.0@iblis_ms/stable
+
 ECHO "----------------------- test package: GCC %GCC_VERSION%: libstdc++ ----------------------- "
 CALL conan test test_package -s compiler=gcc -s compiler.version=%GCC_VERSION% -s compiler.libcxx=libstdc++ FreeGlut/3.0.0@iblis_ms/stable --build
 IF %errorlevel% neq 0 EXIT /b %errorlevel%

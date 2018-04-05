@@ -21,7 +21,9 @@ if [ ! -e "$CC" ]; then
   exit 1
 fi
 
+conan export . FreeGlut/3.0.0@iblis_ms/stable
+
 echo "----------------------- test package: CLANG: libc++ -----------------------"
-conan test test_package -s compiler=$clangName -s compiler.version=$clangVersion -s compiler.libcxx=libc++ Freeglut/3.0.0@iblis_ms/stable --build
+conan test test_package -s compiler=$clangName -s compiler.version=$clangVersion -s compiler.libcxx=libc++ FreeGlut/3.0.0@iblis_ms/stable --build
 
 cd $currentDir

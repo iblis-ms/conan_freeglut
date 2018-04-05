@@ -17,12 +17,7 @@ export staticLibExt="a"
 
 conan --version
 
-
-./startConanServer.sh
-
 ./runConanPackageTest.sh
 
 ./runTestPrograms.sh
 
-
-./stopConanServer.sh

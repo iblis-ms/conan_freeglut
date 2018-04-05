@@ -4,37 +4,33 @@ SETLOCAL EnableDelayedExpansion
 ECHO "------------------ program tests ------------------"
 
 SET "CURRENT_PATH=%~dp0"
+ 
+IF EXIST "%HOME%\.conan\data\FreeGlut" RD /q /s "%HOME%\.conan\data\FreeGlut"
 
-IF %errorlevel% neq 0 EXIT /b %errorlevel%
+CALL startConanServer.bat
 
 FOR %%m IN (True False) DO (
-    SET "GMOCK=%%m"
+    SET "demos=%%m"
     FOR %%t IN (True False) DO (
-        SET "GTEST=%%t"
+        SET "static=%%t"
         FOR %%s IN (True False) DO (
-            SET "SHARED=%%s"
-            
-            SET "RUN=False"
-            IF "!GTEST!" == "True" (
-                SET "RUN=True"
-            )
-            IF "!GMOCK!" == "True" (
-                SET "RUN=True"
-            )
-            
-            IF "!RUN!" == "True" (
-                FOR %%a IN (True False) DO (
-                    SET "INCLUDE_MAIN=%%a"
+            SET "gles=%%s"
+            FOR %%a IN (True False) DO (
+                SET "printErrors=%%a"
+                FOR %%b IN (True False) DO (
+                    SET "printWarnings=%%b"
                     
-                    CALL runVisual.bat !GMOCK! !GTEST! !SHARED! !INCLUDE_MAIN! || exit /b 1
+                    CALL runVisual.bat !demos! !static! !gles! !printErrors! !printWarnings! || exit /b 1
                     
-                    CALL runGcc.bat !GMOCK! !GTEST! !SHARED! !INCLUDE_MAIN! libstdc++ || exit /b 1
+                    CALL runGcc.bat !demos! !static! !gles! !printErrors! !printWarnings! libstdc++ || exit /b 1
                     
-                    CALL runGcc.bat !GMOCK! !GTEST! !SHARED! !INCLUDE_MAIN! libstdc++11 || exit /b 1
+                    CALL runGcc.bat !demos! !static! !gles! !printErrors! !printWarnings! libstdc++11 || exit /b 1
                 )
             )
         )
     )
 )
+
+CALL stopConanServer.bat
 
 CD %CURRENT_PATH%

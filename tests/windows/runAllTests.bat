@@ -46,17 +46,10 @@ IF NOT EXIST "%VISUAL_STUDIO_COMPILER%" (
     EXIT 1
 )
 
-CALL startConanServer.bat
-IF %errorlevel% neq 0 EXIT /b %errorlevel%
-
 CALL runConanPackageTest.bat
 IF %errorlevel% neq 0 EXIT /b %errorlevel%
 
 CALL runTestPrograms.bat
-IF %errorlevel% neq 0 EXIT /b %errorlevel%
-
-
-CALL stopConanServer.bat
 IF %errorlevel% neq 0 EXIT /b %errorlevel%
 
 ECHO "Success"

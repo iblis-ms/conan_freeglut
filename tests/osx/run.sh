@@ -73,6 +73,8 @@ lib, *.lib -> ../${name}/lib
 doc, * -> ../${name}/doc
 EOL
 
+cat conanfile.txt
+
 cp conanfile.txt "$outputDir/conanfile.txt"
 
 echo "conan install . --build -s compiler=$compilerName -s compiler.version=$compilerVersion -s compiler.libcxx=$stdlib"
@@ -108,7 +110,7 @@ fi
 
 cd "$outputDir"
 
-if [ "$shared" == "True" ]
+if [ "$FREEGLUT_STATIC" != "True" ]
 then
   libSubfolder='bin'
   libExt=$sharedLibExt

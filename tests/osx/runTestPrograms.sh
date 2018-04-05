@@ -6,13 +6,18 @@ echo "------------------ program tests ------------------"
 
 currentDir=`pwd`
 
+if [ -d ~/.conan_server/data/Freeglut ]
+then
+  rm -rf ~/.conan_server/data/Freeglut
+fi
 
+./startConanServer.sh
 
-for demos in True False
+for demos in False True
 do
-  for static in True False
+  for static in False True 
   do
-    for gles in False # True https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1706936 
+    for gles in False # True https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1706936 - cannot install libgles1-mesa
     do
       for printErrors in True False
       do
@@ -20,7 +25,7 @@ do
         do
           for compiler in clang gcc
           do
-            for stdlib in libstdc++ libstdc++11 #libc++ 
+            for stdlib in libstdc++ libstdc++11 libc++ 
             do
               if [ "$compiler" != "gcc" ] || [ "$stdlib" != "libc++" ]
               then
@@ -42,5 +47,6 @@ do
   done
 done
 
+./stopConanServer.sh
 
 cd "$currentDir"
