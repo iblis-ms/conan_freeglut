@@ -11,6 +11,7 @@ git checkout tags/1.2.1
 pip install -r %CONAN_DIR%\conans\requirements.txt
 pip install -r %CONAN_DIR%\conans\requirements_server.txt
 pip install -r %CONAN_DIR%\conans\requirements_dev.txt
+pip install pylint﻿
 
 ECHO "COPY %CURRENT_DIR%\conan.bat %CONAN_DIR%\conan.bat"
 COPY %CURRENT_DIR%\conanResources\conan.bat %CONAN_DIR%\conan.bat

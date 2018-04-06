@@ -13,15 +13,16 @@ fi
 
 ./startConanServer.sh
 
-for demos in False True
+# all options are building to long
+for demos in False # True
 do
   for static in False True 
   do
     for gles in False # True https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1706936 - cannot install libgles1-mesa
     do
-      for printErrors in True False
+      for printErrors in False # True
       do
-        for printWarnings in True False
+        for printWarnings in False # True
         do
           for compiler in clang gcc
           do
